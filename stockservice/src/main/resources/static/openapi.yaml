@@ -1,0 +1,118 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Microsoft Azure Deployment Server URL
+tags:
+  - name: Products
+    description: Products Endpoints
+  - name: Stores
+    description: Stores Endpoints
+paths:
+  /api/products:
+    get:
+      tags:
+        - Products
+      summary: Get All Products
+      description: Endpoint que permite obtener la lista de todos los productos correspondientes a una tienda
+      operationId: getAllProducts
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListProducts'
+              examples: # Child of media type
+                Polo Azul: # Example 1
+                  value:
+                    id: 1
+                    name: Polo Azul
+                    code: 12345665
+                    description: Polo Azul de la empresa Lacoste talla M
+                    price: 45.6
+                Polo Verde: # Example 2
+                  value:
+                    id: 2
+                    name: Polo Verde
+                    code: 123453432
+                    description: Polo Azul de la empresa Lacoste talla M
+                    price: 45.6
+                Polo Rojo: # Example 2
+                  value:
+                    id: 3
+                    name: Polo Rojo
+                    code: 123478675
+                    description: Polo Rojo de la empresa Lacoste talla M
+                    price: 45.6
+  /api/stores:
+    get:
+      tags:
+        - Stores
+      summary: Get All Stores
+      description: Endpoint que permite obtener la lista de todas las sucursales del negocio
+      operationId: getAllStores
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ListStores'
+              examples: # Child of media type
+                Tienda Lacoste: # Example 1
+                  value:
+                    id: 1
+                    name: Tienda Lacoste
+                    location: Av. Garcia Rada 356
+                    phone: +51 999333777
+                Tienda Topitop: # Example 1
+                  value:
+                    id: 1
+                    name: Tienda Topitop
+                    location: Av. Aviacion 123
+                    phone: +51 987654321
+                Tienda Oeschle: # Example 1
+                  value:
+                    id: 1
+                    name: Tienda Oeschle
+                    location: Av. Angamos 1630
+                    phone: +51 998877665
+
+components:
+  schemas:
+    ListProducts:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          format: string
+        code:
+          type: string
+          format: string
+        description:
+          type: string
+          format: string
+        price:
+          type: number
+          format: float
+    ListStores:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          format: string
+        location:
+          type: string
+          format: string
+        phone:
+          type: string
+          format: string
